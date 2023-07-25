@@ -10,3 +10,4 @@ class AppUser(AbstractUser, BaseModel):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
+    
