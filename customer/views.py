@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login
 from .forms import SignUpForm
 
 def home(request):
-    return render(request, "customer/welcome.html", {"name": "Muzzamil", "title": "My Website Title"})
+    return render(request, "customer/welcome.html", {"name": "Muzzamil", "title": "Home Page"})
 
 def SignUpView(request):
     if request.method == "POST":
@@ -23,7 +23,7 @@ def LoginView(request):
         user = authenticate(email=email, password=password)
         if user is not None:
             login(request, user)
-            return render(request, "customer/welcome.html", {"name": "Muzzamil", "title": "My Website Title"})
+            return render(request, "customer/welcome.html", {"name": "Muzzamil", "title": "Home Page"})
     else:
         return render(request, "customer/login.html")
 
