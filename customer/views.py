@@ -22,3 +22,7 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'customer/signup.html', {'form': form})
+
+
+
+
