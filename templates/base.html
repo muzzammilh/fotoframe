@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.1/lux/bootstrap.min.css"
-        integrity="sha512-AEz+khxSceaCAGjFlMVVP44z6/Wn0VAE2Q5aSpQR7tHORYsYP2vzU7W3OSvncmYZOX82xCJYd4bq/0iR+Qp9fw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>{% block title %}{% endblock %} | Fotoframe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.1/lux/bootstrap.min.css" integrity="sha512-AEz+khxSceaCAGjFlMVVP44z6/Wn0VAE2Q5aSpQR7tHORYsYP2vzU7W3OSvncmYZOX82xCJYd4bq/0iR+Qp9fw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-
 <body>
     <div class="container">
         <h1>Welcome to fotoframe</h1>
-        <hr>
+        <hr />
         {% block content %}{% endblock %}
     </div>
 </body>
-
 </html>

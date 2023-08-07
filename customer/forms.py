@@ -6,7 +6,3 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = AppUser
         fields = ('email', 'password1', 'password2', )
-
-
-
-
