@@ -40,3 +40,4 @@ def upload_image(request):
     else:
         form = PostForm()
     return render(request, 'customer/upload_image.html', {'form': form})
+    
