@@ -34,9 +34,20 @@ class AppUserManager(BaseUserManager):
 class AppUser(AbstractUser, BaseModel):
     username = None
     email = models.EmailField('email address', unique=True)
-    profile_pic = models.ImageField(upload_to ='uploads/% Y/% m/% d/')
+    profile_pic = models.ImageField(upload_to ='media/')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
     objects = AppUserManager()
+
+
+class Post(BaseModel):
+    user_id = models.ForeignKey(AppUser, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to ='media/')
+    description = models.TextField(blank=True, null=True)
+    original_post = models.ForeignKey('self', on_delete=models.SET_NULL, blank=True, null=True)
+    repost_count = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"Post by {self.user_id.email}, ID: {self.id}"
