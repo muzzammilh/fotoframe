@@ -1,6 +1,8 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login
-from .forms import SignUpForm
+from django.contrib.auth.decorators import login_required
+
+from .forms import SignUpForm, PostForm
 
 def home(request):
     return render(request, "customer/welcome.html", {"name": "Muzzammil", "title": "My web title"})
@@ -24,3 +26,18 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'customer/signup.html', {'form': form})
+
+
+@login_required
+def upload_image(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user_id = request.user
+            form.save()
+            return render(request, 'customer/upload_success.html')
+    else:
+        form = PostForm()
+    return render(request, 'customer/upload_image.html', {'form': form})
+    
