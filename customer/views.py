@@ -1,11 +1,14 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-
+from .models import Post
 from .forms import SignUpForm, PostForm
 
+@login_required
 def home(request):
-    return render(request, "customer/welcome.html", {"name": "Muzzammil", "title": "My web title"})
+    user_id = request.user.id
+    posts = Post.objects.filter(user_id=user_id).order_by('-created_at')
+    return render(request, "customer/welcome.html", {"name": "Muzzamil", "title": "home",'posts': posts})
 
 def signup(request):
     if request.method == 'POST':
@@ -40,4 +43,19 @@ def upload_image(request):
     else:
         form = PostForm()
     return render(request, 'customer/upload_image.html', {'form': form})
+    
+
+def loginform(request):
+    if request.method == "POST":
+        email = request.POST['email']
+        password = request.POST['password']
+
+        user = authenticate(email=email, password=password)
+        if user is not None:
+            login(request, user)
+            return home(request)
+        else :
+            return render(request, "customer/login.html", {"error": "Invalid credentials"})
+    else:
+        return render(request, "customer/login.html")
     
