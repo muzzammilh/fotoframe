@@ -66,9 +66,10 @@ def options_page(request):
 
         if form.is_valid():
             form.save()
-            return render(request, 'customer/upload_success.html')
-
+    
     else:
         form = ProfilePictureForm(instance=request.user)
 
-    return render(request, 'customer/options.html', {'form': form})
+    profile_pic = request.user.profile_pic
+
+    return render(request, 'customer/options.html', {'form': form, 'profile_pic': profile_pic})
