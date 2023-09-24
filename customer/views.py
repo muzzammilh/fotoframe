@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from .models import Post
-from .forms import SignUpForm, PostForm
+from .forms import SignUpForm, PostForm, ProfilePictureForm
 
 @login_required
 def home(request):
@@ -59,3 +59,17 @@ def loginform(request):
     else:
         return render(request, "customer/login.html")
     
+
+def options(request):
+    if request.method == 'POST':
+        form = ProfilePictureForm(request.POST, request.FILES, instance=request.user)
+
+        if form.is_valid:
+            form.save()
+
+            return render(request, 'customer/upload_success.html')
+        
+        else:
+            form = ProfilePictureForm(instance=request.user)
+
+    return render(request, 'customer/options.html', {'form': form})
