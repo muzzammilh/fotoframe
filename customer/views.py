@@ -66,6 +66,7 @@ def options_page(request):
 
         if form.is_valid():
             form.save()
+            return redirect('home') 
     
     else:
         form = ProfilePictureForm(instance=request.user)
