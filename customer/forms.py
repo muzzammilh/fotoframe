@@ -13,3 +13,8 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['image', 'description']
+
+class ProfilePictureForm(forms.ModelForm):
+    class Meta:
+        model = AppUser
+        fields = ['profile_picture']
