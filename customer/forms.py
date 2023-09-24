@@ -14,7 +14,8 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = ['image', 'description']
 
+
 class ProfilePictureForm(forms.ModelForm):
     class Meta:
         model = AppUser
-        fields = ['profile_picture']
+        fields = ['profile_pic']

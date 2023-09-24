@@ -59,17 +59,16 @@ def loginform(request):
     else:
         return render(request, "customer/login.html")
     
-
-def options(request):
+@login_required
+def options_page(request):
     if request.method == 'POST':
         form = ProfilePictureForm(request.POST, request.FILES, instance=request.user)
 
-        if form.is_valid:
+        if form.is_valid():
             form.save()
-
             return render(request, 'customer/upload_success.html')
-        
-        else:
-            form = ProfilePictureForm(instance=request.user)
+
+    else:
+        form = ProfilePictureForm(instance=request.user)
 
     return render(request, 'customer/options.html', {'form': form})
