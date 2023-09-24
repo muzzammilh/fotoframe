@@ -19,3 +19,4 @@ class ProfilePictureForm(forms.ModelForm):
     class Meta:
         model = AppUser
         fields = ['profile_pic']
+        

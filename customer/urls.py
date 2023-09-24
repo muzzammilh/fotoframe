@@ -9,7 +9,3 @@ urlpatterns = [
     path('',views.loginform, name='login'),
     path('options/', views.options_page, name='options')
 ]
-
-
-
-
