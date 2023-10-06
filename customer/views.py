@@ -3,6 +3,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from .models import Post
 from .forms import SignUpForm, PostForm, ProfilePictureForm
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash 
 
 @login_required
 def home(request):
@@ -74,3 +76,16 @@ def options_page(request):
     profile_pic = request.user.profile_pic
 
     return render(request, 'customer/options.html', {'form': form, 'profile_pic': profile_pic})
+
+
+def change_password(request):
+    if request.method == "POST":
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            # Update the session to reflect the password change
+            update_session_auth_hash(request, user)
+            return redirect('home')  # Redirect to a success page
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'customer/password_change.html', {'form': form})
